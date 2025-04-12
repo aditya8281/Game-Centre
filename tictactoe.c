@@ -3,7 +3,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#include "header.h"
+//#include "header.h"
 
 #define PLAYER 'X'
 #define COMPUTER 'O'
@@ -24,7 +24,7 @@ char boardT[3][3];// globally defined
 //general statement blue
 //error statement red
 
-void printBoardT();
+void printBoardT(int winner);
 int isBoardFull();
 int checkWinner(int player);
 void playerMove();
@@ -36,6 +36,7 @@ void computerMove();
 int mtictactoe() {
 
     int player;
+    int winner = 0;
     
     // scanf("%d",&player);
 
@@ -45,6 +46,13 @@ int mtictactoe() {
            printf(RESET);
     //     mtictactoe();
     // }
+
+    // Initialize 3x3 board with empty spaces
+     for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+            boardT[i][j]=' ';
+        }
+    }    
     
     do
     {
@@ -63,14 +71,6 @@ int mtictactoe() {
     
 
     if (player==1){
-
-        int winner = 0;
-        
-        // Initialize 3x3 board with empty spaces
-        for (int i = 0; i < 3; i++)
-            for (int j = 0; j < 3; j++)
-                boardT[i][j] = EMPTY;
-        
         while (1) {
             printBoardT(winner);
     
@@ -81,26 +81,19 @@ int mtictactoe() {
             if (winner != 0 || isBoardFull()==1) break;
             computerMove();
             
-            //winner = checkWinner();                                //these two statements are getting repeated.
-            //if (winner != 0 || isBoardFull()==1) break;
+            winner = checkWinner(player);                                
+            if (winner != 0 || isBoardFull()==1) break;
     }
 
     printBoardT(winner);}
 
-    if(player==2){
+    else if(player==2){
         int currentPlayer = 1; // Player 1 starts first
         int choice, row, col;
         char mark;
     
-        // Initialize 3x3 board with empty spaces
-        for (int i = 0; i < 3; i++){
-            for (int j = 0; j < 3; j++){
-                boardT[i][j]=' ';
-            }
-        }    
-    
         while (1) {
-            printBoardT(NULL);
+            printBoardT(winner);
             currentPlayer = (currentPlayer % 2!=0) ? 1 : 2; // Toggle player (1 or 2)
             mark = (currentPlayer == 1) ? 'X' : 'O'; // Player 1 is 'X' and Player 2 is 'O'
     
@@ -127,18 +120,15 @@ int mtictactoe() {
                     printf(RESET);
                 }
             }
-            // Check if there's a winner
-            if (checkWinner(player)) {
-                printBoardT(NULL);
+            // Check if the board is full (i.e., it's a draw)
+            if (isBoardFull()==1) {
+                printBoardT(winner);
                 break;
             }
-    
-            // Check if the board is full (i.e., it's a draw)
-            if (isBoardFull()) {
-                printBoardT(NULL);
-                //printf(BLUE);
-                //printf("IT IS A DRAW!\n");   //correct arni's
-                //printf(RESET);
+
+            // Check if there's a winner
+            if (checkWinner(player)) {
+                printBoardT(winner);
                 break;
             }
     
@@ -147,7 +137,7 @@ int mtictactoe() {
     }
 
     printf(BLUE);
-    printf("1. Enter R to Restart\n2. Enter E to Exit");
+    printf("1. Enter R to Restart\n2. Enter E to Exit ");
     printf(RESET);
     char in;
     scanf(" %c",&in);
@@ -171,7 +161,7 @@ int mtictactoe() {
 void printBoardT(int winner) {     
     if(winner==0)
     {
-        system("clear||cls");
+        //system("clear||cls");
     }
     printf("\n"); // Extra space
     
@@ -190,18 +180,22 @@ void printBoardT(int winner) {
 
 // Check if the board is full
 int isBoardFull() {
-    for (int i = 0; i < 3; i++)
-        for (int j = 0; j < 3; j++)
-            if (boardT[i][j] == EMPTY) return 0;
-            printf("\n");
-            printf("IT IS A DRAW!");
-            printf("\n");
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+            if (boardT[i][j] == EMPTY){
+                return 0;
+            }    
+        }
+    }
+    printf("\n");
+    printf("IT IS A DRAW!");
+    printf("\n");       
     return 1;
 }
     
 
 // Check for a winner (returns 'X', 'O', or 0 for no winner)
-int checkWinner(int player) {                                    //modified to adapt to two player
+int checkWinner(int player) {                                    //modified to adapt to two players
     for (int i = 0; i < 3; i++) {
         // Check rows
         if (boardT[i][0] == boardT[i][1] && boardT[i][1] == boardT[i][2] && boardT[i][0] != EMPTY) {
@@ -241,14 +235,14 @@ int checkWinner(int player) {                                    //modified to a
         // Check columns
         if (boardT[0][i] == boardT[1][i] && boardT[1][i] == boardT[2][i] && boardT[0][i] != EMPTY) {
             if(player==1){
-                if(boardT[i][0] =='X'){
+                if(boardT[0][i] =='X'){
                   printf("\n");
                   printf(BLUE);  
                   printf("YOU WIN!\n");
                   printf(RESET); 
                   printf("\n");
                 }     
-               if(boardT[i][0] =='O'){
+               if(boardT[0][i] =='O'){
                   printf("\n");
                   printf(BLUE); 
                   printf("COMPUTER WINS!\n");
@@ -256,14 +250,14 @@ int checkWinner(int player) {                                    //modified to a
                   printf("\n");
                 } 
             } else{
-                if(boardT[i][0] =='X'){
+                if(boardT[0][i] =='X'){
                   printf("\n");
                   printf(BLUE);
                   printf("PLAYER 1 WINS!\n");   
                   printf(RESET);
                   printf("\n");
                 }
-                if(boardT[i][0] =='O'){
+                if(boardT[0][i] =='O'){
                   printf("\n");
                   printf(BLUE);
                   printf("PLAYER 2 WINS!\n");
@@ -390,3 +384,6 @@ void computerMove() {
     boardT[row][col] = COMPUTER;
 }
 
+int main(){
+    mtictactoe();
+}
