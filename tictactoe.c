@@ -16,12 +16,9 @@ void printBoardT();
 int isBoardFull();
 int checkWinner();
 void playerMove();
-void computerMove();
-// void printboard();  
+void computerMove(); 
 
 
-
-    
 
 
 int mtictactoe() {
