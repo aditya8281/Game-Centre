@@ -24,32 +24,32 @@ void computerMove();
 int mtictactoe() {
 
     int player;
-    
-    // scanf("%d",&player);
+    printf("Enter 1 if you want to play alone or Enter 2 if you want to play with friend:\n");
+    scanf("%d",&player);
 
-    // if(player!=1 && player!=2){
-    //     printf("WRONG INPUT\n");
-    //     mtictactoe();
-    // }
+    if(player!=1 && player!=2){
+        printf("WRONG INPUT\n");
+        mtictactoe();
+    }
     
-    do
-    {
-        printf("Enter 1 if you want to play alone or Enter 2 if you want to play with friend:\n");
-        scanf("%d",&player);
-        if (player!=1 && player!=2)
-        {
-            printf("WRONG INPUT\n");
+    // do
+    // {
+    //     printf("Enter 1 if you want to play alone or Enter 2 if you want to play with friend:\n");
+    //     scanf("%d",&player);
+    //     if (player!=1 && player!=2)
+    //     {
+    //         printf("WRONG INPUT\n");
 
-        }
+    //     }
         
-    } while (player!=1 && player!=2);
+    // } while (player!=1 && player!=2);
     
 
     if (player==1){
 
     int winner = 0;
     
-    // Initialize 3x3 board with empty spaces
+    // make that board
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
             boardT[i][j] = EMPTY;
@@ -60,11 +60,11 @@ int mtictactoe() {
         
         playerMove();
         
-        winner = checkWinner();
+        winner = checkWinner();// check point-player
         if (winner != 0 || isBoardFull()==1) break;
         computerMove();
         
-        winner = checkWinner();
+        winner = checkWinner();//chech piont comp
         if (winner != 0 || isBoardFull()==1) break;
     }
 
@@ -138,16 +138,19 @@ int mtictactoe() {
  
 
 
-// Print the Tic-Tac-Toe board
+
+
+// display of board// har ek bar jo input hai usske sath print karenga
 void printBoardT(int winner) {
     if(winner==0)
     {
-        system("clear||cls");
+        system("clear||cls");// last vale ko clear karke new print
     }
-    printf("\n"); // Extra space
+    printf("\n"); 
     
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
+            
             printf(" %c ", boardT[i][j]);
             if (j < 2) printf("|");
         }
@@ -155,15 +158,17 @@ void printBoardT(int winner) {
         if (i < 2) printf("___|___|___\n");
     }
     printf("   |   |   ");
-    printf("\n"); // Extra space
+    printf("\n"); 
 }
    
 
-// Check if the board is full
+// Check board is full
 int isBoardFull() {
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
-            if (boardT[i][j] == EMPTY) return 0;
+            if (boardT[i][j] == EMPTY) {
+                return 0;
+            }
             printf("\n");
             printf("IT IS A DRAW");
             printf("\n");
@@ -174,6 +179,8 @@ int isBoardFull() {
 // Check for a winner (returns 'X', 'O', or 0 for no winner)
 int checkWinner() {
     for (int i = 0; i < 3; i++) {
+
+        
         // Check rows
         if (boardT[i][0] == boardT[i][1] && boardT[i][1] == boardT[i][2] && boardT[i][0] != EMPTY) {
             if(boardT[i][0] =='X'){
@@ -188,6 +195,8 @@ int checkWinner() {
             }
             return 1;
         }
+
+        
         // Check columns
         if (boardT[0][i] == boardT[1][i] && boardT[1][i] == boardT[2][i] && boardT[0][i] != EMPTY) {
              if(boardT[0][i] =='X'){
@@ -246,7 +255,7 @@ void playerMove() {
     while (1) {
         printf("Enter your move (row [1-3] and column [1-3]): ");
         scanf("%d %d", &row, &col);
-        row--; col--; // Adjust for 0-based indexing
+        row--; col--; // Adjust for array- 1to 0, etc
 
         if (row >= 0 && row < 3 && col >= 0 && col < 3 && boardT[row][col] == EMPTY) {
             boardT[row][col] = PLAYER;
@@ -259,7 +268,7 @@ void playerMove() {
 
 
 
-// Simple algo for comp rand()is for random generation present in stdlib.h
+// comp move with time .h- random generation
 void computerMove() {
     srand(time(NULL));
     int row, col;
