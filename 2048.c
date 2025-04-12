@@ -6,9 +6,7 @@
 
 #define MAXRANDOMVALUE 3
 
-int arr[4][4] = { 0 }, c[4], temp = 0, len = 0, score = 0,
-    highscore = 0, count = 0,
-    ch = 0;
+int arr[4][4] = { 0 }, c[4], temp = 0, len = 0, score = 0,highscore = 0, count = 0,ch = 0;
 
 int findlen(int n);
 
