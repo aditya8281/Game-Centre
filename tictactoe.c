@@ -243,7 +243,7 @@ int checkWinner(int player) {                                    //modified to a
             if(player==1){
                 if(boardT[i][0] =='X'){
                   printf("\n");
-                  print(BLUE);  
+                  printf(BLUE);  
                   printf("YOU WIN!\n");
                   printf(RESET); 
                   printf("\n");
