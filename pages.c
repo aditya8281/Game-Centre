@@ -63,7 +63,10 @@ void login()
     char pass[50];
 
     int success=0;
-
+    
+    FILE *info = fopen("information.txt","w");
+    fclose(info);
+    
     firse:
 
     system("clear ||cls");
@@ -119,7 +122,10 @@ void reg()
     char storedPass[50];
     char name[50];
     char pass[50];
-
+    
+    FILE *info = fopen("information.txt","w");
+    fclose(info);
+    
     reg:
 
     system("clear||cls");
