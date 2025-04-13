@@ -25,8 +25,7 @@ void print()
     int i, j, k, len1;
     printf("%s===========%sGAME CENTRE%s===========%s\n\n",BLUE,RED,BLUE,RESET);
 
-    printf(
-        "\n===============2048==============\n");
+    printf("\n===============2048==============\n");
     printf("YOUR SCORE=%d\n", score);
 
     // highscore
@@ -212,7 +211,11 @@ int m2048()
     FILE* ptr;
     ptr = fopen("highscore.txt", "r");// acessing the highscore text file
     
-    if(ptr==NULL) printf("File didn't open!!"); return 0;
+    if(ptr==NULL)
+    {
+        printf("Error while opening file");
+        return 0;
+    }
     
     fscanf(ptr, "%d", &highscore);
     fclose(ptr);
