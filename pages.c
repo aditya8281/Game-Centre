@@ -75,7 +75,7 @@ void login()
 
     system("clear ||cls");// clearing screen before entering login page
     
-    FILE *info = fopen("information.txt","r");// acessing file with username and password
+    FILE *info = fopen("information.txt","w+");// acessing file with username and password
 
     if(info==NULL)
     {
@@ -145,7 +145,7 @@ void reg()
     scanf(" %s",name);
     printf(">Enter your Password: ");
     scanf(" %s",pass);
-    FILE *info = fopen("information.txt","r");
+    FILE *info = fopen("information.txt","w+");
     
     if(info==NULL)
     {
