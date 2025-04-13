@@ -4,6 +4,8 @@
 
 #include "header.h"
 
+void Page2();
+
 #define SIZE 9
 #define MINES 10
 
@@ -14,14 +16,6 @@
 #define YELLOW  "\033[33m"
 #define BLUE    "\033[34m"
 #define CYAN    "\033[36m"
-
-// // Color codes
-// #define RESET   "\x1b[0m"
-// #define RED     "\x1b[31m"
-// #define GREEN   "\x1b[32m"
-// #define YELLOW  "\x1b[33m"
-// #define BLUE    "\x1b[34m"
-// #define CYAN    "\x1b[36m"
 
 char board[SIZE][SIZE];
 char mines[SIZE][SIZE];
@@ -89,7 +83,7 @@ void toggleFlag(int x, int y) {
 
 void printBoard() {
     system("clear||cls");
-    printf("%s===========%sGAME CENTRE%s===========%s\n\n",BLUE,RED,BLUE,RESET);
+    printf("%s==========%sGAME ARENA%s==========%s\n\n",BLUE,RED,BLUE,RESET);
     printf("\n    ");
     for (int i = 0; i < SIZE; i++) printf("%2d ", i);
     printf("\n   +");
@@ -166,8 +160,10 @@ void showFinalBoard() {
 int mMineSweeper() {
     srand(time(NULL));
     int playing = 1;
+    int reset=0;
 
     while (playing) {
+
         initBoards();
         placeMines();
         int gameOver = 0;
@@ -175,33 +171,34 @@ int mMineSweeper() {
         while (!gameOver) {
             printBoard();
             printf("\nMenu:\n");
-            printf(">1. Reveal a cell\n");
-            printf(" 2. Reset game\n");
-            printf(" 3. Toggle flag on a cell\n");
-            printf(" 4. Exit\n");
-            printf(" \nChoose an option: ");
+            printf("1. Reveal a cell\n");
+            printf("2. Reset game\n");
+            printf("3. Toggle flag on a cell\n");
+            printf("4. Exit Game\n");
+            printf("Choose an option: ");
 
-            int option;
-            scanf("%d", &option);
+            char option;
+            scanf(" %c", &option);
 
-            if (option == 1) {
+            if (option == '1') {
                 int x, y;
-                printf(">Enter coordinates to reveal (row col): ");
+                printf("Enter coordinates to reveal (row col): ");
                 scanf("%d %d", &x, &y);
 
                 if (x < 0 || x >= SIZE || y < 0 || y >= SIZE) {
-                    printf("\nInvalid input!!!, Try again.\n");
+                    printf("Invalid input. Try again.\n");
                     continue;
                 }
 
                 if (flagged[x][y]) {
-                    printf("\nThis cell is flagged. Unflag it first to reveal.\n");
+                    printf("This cell is flagged. Unflag it first to reveal.\n");
                     continue;
                 }
 
                 if (mines[x][y] == 'M') {
                     printf("\n%sBOOM! You hit a mine!%s\n", RED, RESET);
                     showFinalBoard();
+                    reset=1;
                     gameOver = 1;
                     break;
                 }
@@ -214,22 +211,52 @@ int mMineSweeper() {
                     gameOver = 1;
                     break;
                 }
-            } else if (option == 2) {
+            } else if (option == '2') {
                 printf("%sGame has been reset.%s\n", CYAN, RESET);
+                reset = 1;
                 break;
-            } else if (option == 3) {
+            } else if (option == '3') {
                 int x, y;
-                printf(">Enter coordinates to toggle flag (row col): ");
+                printf("Enter coordinates to toggle flag (row col): ");
                 scanf("%d %d", &x, &y);
                 toggleFlag(x, y);
-            } else if (option == 4) {
+            } else if (option == '4') {
                 printf("%sExiting game. Goodbye!%s\n", YELLOW, RESET);
+                sleep(1);
+                system("clear||cls");
                 playing = 0;
                 gameOver = 1;
+                Page2();
             } else {
-                printf("Invalid option!!!, Try again.\n");
+                printf("Invalid option. Try again.\n");
             }
         }
+        if(reset==1)
+        {
+
+            printf("1. Back\n2. Restart\n3. Exit Game\n\nChoose Option: ");
+            char in;
+            in:
+            scanf(" %c",&in);
+            if(in=='1')
+            {
+                Page2();
+            }
+            else if(in=='2')
+            {
+                mMineSweeper();
+            }
+            else if(in=='3')
+            {
+                exit(0);
+            }
+            else{
+                printf("Invalid Input");
+                goto in;
+            }
+        }
+
+
     }
 
     return 0;
