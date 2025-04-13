@@ -8,6 +8,9 @@ void Page1();
 void Page2();
 void game();
 
+
+
+//fun for page 2
 void Page2()
 {
     system("clear||cls");
@@ -42,7 +45,7 @@ void Page2()
     else if(n=='B'||n=='b')
     {
         system("clear||cls");
-        game();
+        game();// bcz cannot call main
 
     }
     else if(n=='E'||'e')
@@ -57,6 +60,8 @@ void Page2()
 
 }
 
+
+//function for login
 void login()
 {
     char storedName[50];
@@ -68,9 +73,9 @@ void login()
 
     firse:
 
-    system("clear ||cls");
+    system("clear ||cls");// clearing screen before entering login page
     
-    FILE *info = fopen("information.txt","r");
+    FILE *info = fopen("information.txt","r");// acessing file with username and password
 
     if(info==NULL)
     {
@@ -85,9 +90,9 @@ void login()
     printf(">Enter your Password: ");
     scanf(" %s",pass);
 
-    while(fscanf(info,"%s %s",storedName,storedPass) != EOF)
+    while(fscanf(info,"%s %s",storedName,storedPass) != EOF)//eof-end of file
     {
-        if((strcmp(storedName,name)==0) && (strcmp(storedPass,pass)==0))
+        if((strcmp(storedName,name)==0) && (strcmp(storedPass,pass)==0))// checking//strcmp-string compare
         {
             success = 1;
             break;
@@ -110,7 +115,7 @@ void login()
             Page1();
         }
         else if(in=='3')
-        goto firse;
+        goto firse;// back to start of this fun
 
         
     }
@@ -120,6 +125,8 @@ void login()
 }
 
 
+
+// function for registration
 void reg()
 {
 
@@ -148,7 +155,7 @@ void reg()
 
     while(fscanf(info,"%s %s",storedName,storedPass) != EOF)
     {
-        if((strcmp(storedName,name)==0) && (strcmp(storedPass,pass)==0))
+        if((strcmp(storedName,name)==0) && (strcmp(storedPass,pass)==0))//comparing
         {
             printf("Already Exists!!!\n\n");
             char in;
@@ -172,7 +179,7 @@ void reg()
 
     }
     fclose(info);
-    info = fopen("information.txt","a");
+    info = fopen("information.txt","a");// appending the text
     
     if(info==NULL)
     {
@@ -181,11 +188,14 @@ void reg()
     }
 
 
-    fprintf(info,"%s %s\n",name,pass);
+    fprintf(info,"%s %s\n",name,pass);//entering the data
     fclose(info);
 
 }
 
+
+
+// fun for page 1
 void Page1()
 {
     printf("%s===========%sGAME CENTRE%s===========%s\n\n",BLUE,RED,BLUE,RESET);
@@ -195,7 +205,7 @@ void Page1()
     
     do
     {
-        scanf(" %c",&in);
+        scanf(" %c",&in);// %c instead of %d cause in case of d if words are entered the infinite loop is formed
         if(in!='1'&&in!='2'&&in!='3')
         {
             printf("INVALID INPUT!!!");
@@ -203,6 +213,8 @@ void Page1()
         else break;
     } while (in!='1'&&in!='2'&&in!='3');
 
+
+    
     if(in=='1')
     {
         login();
