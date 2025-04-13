@@ -10,11 +10,12 @@ void game();
 
 void Page2()
 {
+    system("clear||cls");
     printf("%s===========%sGAME CENTRE%s===========%s\n\n",BLUE,RED,BLUE,RESET);
     
     printf("Which game you want to play...\n\n");
     printf("1. 2048\n2. Mine Sweeper\n3. tictactoe\n\n");
-    printf("\nEnter B to Go back to Log Out\nEnter E to Exit\n\n");
+    printf("\nEnter B to Log Out\nEnter E to Exit\n\n");
     printf("Enter Your Choice: ");
 
 
@@ -40,6 +41,7 @@ void Page2()
     }
     else if(n=='B'||n=='b')
     {
+        system("clear||cls");
         game();
 
     }
@@ -63,10 +65,7 @@ void login()
     char pass[50];
 
     int success=0;
-    
-    FILE *info = fopen("information.txt","w");
-    fclose(info);
-    
+
     firse:
 
     system("clear ||cls");
@@ -122,10 +121,7 @@ void reg()
     char storedPass[50];
     char name[50];
     char pass[50];
-    
-    FILE *info = fopen("information.txt","w");
-    fclose(info);
-    
+
     reg:
 
     system("clear||cls");
