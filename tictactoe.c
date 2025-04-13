@@ -3,7 +3,7 @@
 #include <time.h>
 #include <unistd.h>
 
-//#include "header.h"
+#include "header.h"
 
 #define PLAYER 'X'
 #define COMPUTER 'O'
@@ -12,12 +12,13 @@
 char boardT[3][3];// globally defined
 
 // Color codes
-#define RESET   "\x1b[0m"
-#define RED     "\x1b[31m"
-#define GREEN   "\x1b[32m"
-#define YELLOW  "\x1b[33m"
-#define BLUE    "\x1b[34m"
-#define CYAN    "\x1b[36m"
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define CYAN    "\033[36m"
+
 
 // player1 yellow     player2 green
 //player   yellow     computer green
@@ -57,13 +58,13 @@ int mtictactoe() {
     do
     {
         printf(BLUE);
-        printf("Enter 1 if you want to play with computer or Enter 2 if you want to play with friend:\n");   //changed play alone to play with computer
+        printf(">Enter 1 if you want to play with computer or Enter 2 if you want to play with friend:\n");   //changed play alone to play with computer
         printf(RESET);
         scanf("%d",&player);
         if (player!=1 && player!=2)
         {
             printf(RED);
-            printf("WRONG INPUT\n");
+            printf("WRONG INPUT!!!\n");
             printf(RESET);
         }
         
@@ -101,11 +102,11 @@ int mtictactoe() {
             while (1) {
                 if(mark=='X'){
                     printf(YELLOW);
-                    printf("Player %d :Enter your move (row [1-3] and column [1-3]): ",currentPlayer);
+                    printf("> Player %d :Enter your move (row [1-3] and column [1-3]): ",currentPlayer);
                     printf(RESET);
                 } else{
                     printf(GREEN);
-                    printf("Player %d :Enter your move (row [1-3] and column [1-3]): ",currentPlayer);
+                    printf("> Player %d :Enter your move (row [1-3] and column [1-3]): ",currentPlayer);
                     printf(RESET);
                 }
                 scanf("%d %d", &row, &col);
@@ -116,7 +117,7 @@ int mtictactoe() {
                     break;
                 } else {
                     printf(RED);
-                    printf("Invalid move, try again.\n");
+                    printf("Invalid move!!!, try again.\n");
                     printf(RESET);
                 }
             }
@@ -137,7 +138,7 @@ int mtictactoe() {
     }
 
     printf(BLUE);
-    printf("1. Enter R to Restart\n2. Enter E to Exit ");
+    printf(">1. Enter R to Restart\n 2. Enter E to Exit\n");
     printf(RESET);
     char in;
     scanf(" %c",&in);
@@ -352,7 +353,7 @@ void playerMove() {
     int row, col;
     while (1) {
         printf(YELLOW);
-        printf("Enter your move (row [1-3] and column [1-3]): ");
+        printf(">Enter your move (row [1-3] and column [1-3]): ");
         printf(RESET);
         scanf("%d %d", &row, &col);
         row--; col--; // Adjust for 0-based indexing
@@ -361,7 +362,7 @@ void playerMove() {
             boardT[row][col] = PLAYER;
             break;
         } else {
-            printf("Invalid move, try again.\n");
+            printf("Invalid move!!!, try again.\n");
         }
     }
 }
@@ -382,8 +383,4 @@ void computerMove() {
     } while (boardT[row][col] != EMPTY);
     
     boardT[row][col] = COMPUTER;
-}
-
-int main(){
-    mtictactoe();
 }
