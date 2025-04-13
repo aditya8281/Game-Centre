@@ -65,7 +65,7 @@ void print()
         "\n---------------------------------\n");
     printf("RESTART-> R\n");
     printf("EXIT-> U\n");
-    printf("ENTER YOUR CHOICE -> "
+    printf("ENTER YOUR CHOISE -> "
            "W,S,A,D\n");
 }
 
