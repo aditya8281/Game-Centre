@@ -22,9 +22,15 @@ char mines[SIZE][SIZE];
 int revealed[SIZE][SIZE];
 int flagged[SIZE][SIZE];
 
+
+
+// array for directional changes
 int dx[] = { -1, -1, -1, 0, 0, 1, 1, 1 };
 int dy[] = { -1, 0, 1, -1, 1, -1, 0, 1 };
 
+
+
+// make the start of board
 void initBoards() {
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++) {
@@ -35,6 +41,9 @@ void initBoards() {
         }
 }
 
+
+
+// make the mines// random generation
 void placeMines() {
     int count = 0;
     while (count < MINES) {
@@ -47,10 +56,12 @@ void placeMines() {
     }
 }
 
+
+// count the no of mines
 int countAdjacentMines(int x, int y) {
     int count = 0;
     for (int d = 0; d < 8; d++) {
-        int nx = x + dx[d];
+        int nx = x + dx[d];   // using direction array to count mines
         int ny = y + dy[d];
         if (nx >= 0 && nx < SIZE && ny >= 0 && ny < SIZE && mines[nx][ny] == 'M')
             count++;
@@ -58,6 +69,8 @@ int countAdjacentMines(int x, int y) {
     return count;
 }
 
+
+// reveal the no.
 void reveal(int x, int y) {
     if (x < 0 || x >= SIZE || y < 0 || y >= SIZE || revealed[x][y] || flagged[x][y])
         return;
@@ -74,6 +87,10 @@ void reveal(int x, int y) {
     }
 }
 
+
+
+
+// flag placing/toggling
 void toggleFlag(int x, int y) {
     if (x < 0 || x >= SIZE || y < 0 || y >= SIZE || revealed[x][y])
         return;
@@ -81,6 +98,9 @@ void toggleFlag(int x, int y) {
     flagged[x][y] = !flagged[x][y];
 }
 
+
+
+//first time board printing
 void printBoard() {
     system("clear||cls");
     printf("%s==========%sGAME ARENA%s==========%s\n\n",BLUE,RED,BLUE,RESET);
@@ -122,6 +142,10 @@ void printBoard() {
     printf("+\n");
 }
 
+
+
+
+// check for winner
 int isWin() {
     int covered = 0;
     for (int i = 0; i < SIZE; i++)
@@ -131,6 +155,9 @@ int isWin() {
     return (covered == MINES);
 }
 
+
+
+// main printing function for printing everytime
 void showFinalBoard() {
     printf("\nFinal Board:\n    ");
     for (int i = 0; i < SIZE; i++) printf("%2d ", i);
@@ -157,6 +184,9 @@ void showFinalBoard() {
     printf("+\n");
 }
 
+
+
+// main fun
 int mMineSweeper() {
     srand(time(NULL));
     int playing = 1;
@@ -168,6 +198,10 @@ int mMineSweeper() {
         placeMines();
         int gameOver = 0;
 
+
+        //basic buttons to play
+        //basic playing mechanism
+        
         while (!gameOver) {
             printBoard();
             printf("\nMenu:\n");
