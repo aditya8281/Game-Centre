@@ -5,6 +5,8 @@
 
 #include "header.h"
 
+void Page2();
+
 #define PLAYER 'X'
 #define COMPUTER 'O'
 #define EMPTY ' '
@@ -36,17 +38,10 @@ void computerMove();
 
 int mtictactoe() {
 
+    printf("%s==========%sGAME ARENA%s==========%s\n\n",BLUE,RED,BLUE,RESET);
+
     int player;
     int winner = 0;
-    
-    // scanf("%d",&player);
-
-    // if(player!=1 && player!=2){
-           printf(RED);
-    //     printf("WRONG INPUT\n");
-           printf(RESET);
-    //     mtictactoe();
-    // }
 
     // Initialize 3x3 board with empty spaces
      for (int i = 0; i < 3; i++){
@@ -138,16 +133,22 @@ int mtictactoe() {
     }
 
     printf(BLUE);
-    printf(">1. Enter R to Restart\n 2. Enter E to Exit\n");
+    printf("1. Restart\n2. Exit Game\n3. Exit App\n");
     printf(RESET);
     char in;
     scanf(" %c",&in);
-    if(in=='R'||in=='r')
+    if(in=='1')
     {
         system("clear || cls");  //Screen clear karva maate
         mtictactoe();
     }
-    if(in=='E'||in=='e')
+
+    if(in=='2')
+    {
+        Page2();
+    }
+
+    if(in=='3')
     {
         exit(0);
     }
