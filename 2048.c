@@ -218,6 +218,8 @@ int m2048()
     system("clear || cls");
 
     FILE* ptr;
+    ptr = fopen("highscore.txt","a");
+    fclose(ptr);
     ptr = fopen("highscore.txt","r");// accessing highscore text file to read
     
     if(ptr==NULL)
