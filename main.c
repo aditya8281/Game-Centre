@@ -3,8 +3,9 @@
 
 #include "header.h"
 
-void game();
+void game();//stating to include
 
+// main fun
 int main()
 {
     game();
