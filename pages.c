@@ -133,6 +133,8 @@ void reg()
     printf(">Enter your Password: ");
     scanf(" %s",pass);
     FILE *info = fopen("information.txt","r");
+    
+    if(info==NULL) printf("File didn't open!!"); return 0;
 
     while(fscanf(info,"%s %s",storedName,storedPass) != EOF)
     {
