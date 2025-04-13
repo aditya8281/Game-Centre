@@ -178,6 +178,9 @@ int m2048()
 
     FILE* ptr;
     ptr = fopen("highscore.txt", "r");
+    
+    if(ptr==NULL) printf("File didn't open!!"); return 0;
+    
     fscanf(ptr, "%d", &highscore);
     fclose(ptr);
     addrandomno();
