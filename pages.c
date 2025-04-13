@@ -75,7 +75,9 @@ void login()
 
     system("clear ||cls");// clearing screen before entering login page
     
-    FILE *info = fopen("information.txt","w+");// acessing file with username and password
+    FILE *info = fopen("information.txt","w");// making file
+    fclose(info);
+    info = fopen("information.txt","r");
 
     if(info==NULL)
     {
