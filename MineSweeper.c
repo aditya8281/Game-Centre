@@ -8,12 +8,20 @@
 #define MINES 10
 
 // Color codes
-#define RESET   "\x1b[0m"
-#define RED     "\x1b[31m"
-#define GREEN   "\x1b[32m"
-#define YELLOW  "\x1b[33m"
-#define BLUE    "\x1b[34m"
-#define CYAN    "\x1b[36m"
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define CYAN    "\033[36m"
+
+// // Color codes
+// #define RESET   "\x1b[0m"
+// #define RED     "\x1b[31m"
+// #define GREEN   "\x1b[32m"
+// #define YELLOW  "\x1b[33m"
+// #define BLUE    "\x1b[34m"
+// #define CYAN    "\x1b[36m"
 
 char board[SIZE][SIZE];
 char mines[SIZE][SIZE];
@@ -80,6 +88,8 @@ void toggleFlag(int x, int y) {
 }
 
 void printBoard() {
+    system("clear||cls");
+    printf("%s===========%sGAME CENTRE%s===========%s\n\n",BLUE,RED,BLUE,RESET);
     printf("\n    ");
     for (int i = 0; i < SIZE; i++) printf("%2d ", i);
     printf("\n   +");
@@ -165,32 +175,32 @@ int mMineSweeper() {
         while (!gameOver) {
             printBoard();
             printf("\nMenu:\n");
-            printf("1. Reveal a cell\n");
-            printf("2. Reset game\n");
-            printf("3. Toggle flag on a cell\n");
-            printf("4. Exit\n");
-            printf("Choose an option: ");
+            printf(">1. Reveal a cell\n");
+            printf(" 2. Reset game\n");
+            printf(" 3. Toggle flag on a cell\n");
+            printf(" 4. Exit\n");
+            printf(" \nChoose an option: ");
 
             int option;
             scanf("%d", &option);
 
             if (option == 1) {
                 int x, y;
-                printf("Enter coordinates to reveal (row col): ");
+                printf(">Enter coordinates to reveal (row col): ");
                 scanf("%d %d", &x, &y);
 
                 if (x < 0 || x >= SIZE || y < 0 || y >= SIZE) {
-                    printf("Invalid input. Try again.\n");
+                    printf("\nInvalid input!!!, Try again.\n");
                     continue;
                 }
 
                 if (flagged[x][y]) {
-                    printf("This cell is flagged. Unflag it first to reveal.\n");
+                    printf("\nThis cell is flagged. Unflag it first to reveal.\n");
                     continue;
                 }
 
                 if (mines[x][y] == 'M') {
-                    printf("\n%sBOOM! You hit a mine!%s 💥\n", RED, RESET);
+                    printf("\n%sBOOM! You hit a mine!%s\n", RED, RESET);
                     showFinalBoard();
                     gameOver = 1;
                     break;
@@ -199,25 +209,25 @@ int mMineSweeper() {
                 reveal(x, y);
 
                 if (isWin()) {
-                    printf("\n%sCongratulations! You've cleared the minefield!%s 🎉\n", GREEN, RESET);
+                    printf("\n%sCongratulations! You've cleared the minefield!%s\n", GREEN, RESET);
                     showFinalBoard();
                     gameOver = 1;
                     break;
                 }
             } else if (option == 2) {
-                printf("%sGame has been reset.%s 🔁\n", CYAN, RESET);
+                printf("%sGame has been reset.%s\n", CYAN, RESET);
                 break;
             } else if (option == 3) {
                 int x, y;
-                printf("Enter coordinates to toggle flag (row col): ");
+                printf(">Enter coordinates to toggle flag (row col): ");
                 scanf("%d %d", &x, &y);
                 toggleFlag(x, y);
             } else if (option == 4) {
-                printf("%sExiting game. Goodbye!%s 👋\n", YELLOW, RESET);
+                printf("%sExiting game. Goodbye!%s\n", YELLOW, RESET);
                 playing = 0;
                 gameOver = 1;
             } else {
-                printf("Invalid option. Try again.\n");
+                printf("Invalid option!!!, Try again.\n");
             }
         }
     }
