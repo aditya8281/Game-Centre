@@ -22,14 +22,9 @@ char mines[SIZE][SIZE];
 int revealed[SIZE][SIZE];
 int flagged[SIZE][SIZE];
 
-
-// defining coordinates arrays to check all 8 directions
 int dx[] = { -1, -1, -1, 0, 0, 1, 1, 1 };
 int dy[] = { -1, 0, 1, -1, 1, -1, 0, 1 };
 
-
-
-// making of board display
 void initBoards() {
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++) {
@@ -40,8 +35,6 @@ void initBoards() {
         }
 }
 
-
-// making mines, random generation
 void placeMines() {
     int count = 0;
     while (count < MINES) {
@@ -54,13 +47,10 @@ void placeMines() {
     }
 }
 
-
-
-// checking all 8 sides for mine
 int countAdjacentMines(int x, int y) {
     int count = 0;
     for (int d = 0; d < 8; d++) {
-        int nx = x + dx[d];// excessing all 8 directions with help of direction array
+        int nx = x + dx[d];
         int ny = y + dy[d];
         if (nx >= 0 && nx < SIZE && ny >= 0 && ny < SIZE && mines[nx][ny] == 'M')
             count++;
@@ -68,16 +58,13 @@ int countAdjacentMines(int x, int y) {
     return count;
 }
 
-
-
-// reveal  the  block with no of mines sorrounding it
 void reveal(int x, int y) {
-    if (x < 0 || x >= SIZE || y < 0 || y >= SIZE || revealed[x][y] || flagged[x][y])// boundary conditions
+    if (x < 0 || x >= SIZE || y < 0 || y >= SIZE || revealed[x][y] || flagged[x][y])
         return;
 
     revealed[x][y] = 1;
     int count = countAdjacentMines(x, y);
-    board[x][y] = count + '0';/// storing ascii value
+    board[x][y] = count + '0';
 
     if (count == 0) {
         board[x][y] = ' ';
@@ -87,10 +74,6 @@ void reveal(int x, int y) {
     }
 }
 
-
-
-
-// putting a flag
 void toggleFlag(int x, int y) {
     if (x < 0 || x >= SIZE || y < 0 || y >= SIZE || revealed[x][y])
         return;
@@ -98,14 +81,11 @@ void toggleFlag(int x, int y) {
     flagged[x][y] = !flagged[x][y];
 }
 
-
-
-// printing nubers around board//printing values and chararters in board for 1 time
 void printBoard() {
     system("clear||cls");
     printf("%s==========%sGAME ARENA%s==========%s\n\n",BLUE,RED,BLUE,RESET);
     printf("\n    ");
-    for (int i = 0; i < SIZE; i++) printf("%2d ", i);// 2d makes sure that spaces are there
+    for (int i = 0; i < SIZE; i++) printf("%2d ", i);
     printf("\n   +");
     for (int i = 0; i < SIZE; i++) printf("---");
     printf("+\n");
@@ -142,10 +122,6 @@ void printBoard() {
     printf("+\n");
 }
 
-
-
-
-// check if you won or not
 int isWin() {
     int covered = 0;
     for (int i = 0; i < SIZE; i++)
@@ -155,9 +131,6 @@ int isWin() {
     return (covered == MINES);
 }
 
-
-
-// printing board everytime you enter 
 void showFinalBoard() {
     printf("\nFinal Board:\n    ");
     for (int i = 0; i < SIZE; i++) printf("%2d ", i);
@@ -183,10 +156,6 @@ void showFinalBoard() {
     for (int i = 0; i < SIZE; i++) printf("---");
     printf("+\n");
 }
-
-
-
-
 
 int mMineSweeper() {
     srand(time(NULL));
