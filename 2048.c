@@ -10,14 +10,10 @@ void Page2();
 
 int arr[4][4] = { 0 }, c[4], temp = 0, len = 0, score = 0,
     highscore = 0, count = 0,
- 
+    ch = 0;
 
-ch = 0;
-// find no of digits
 int findlen(int n);
 
-
-//print basics, and highscore
 void print()
 {
     int i, j, k, len1;
@@ -76,9 +72,6 @@ void print()
     printf(" ENTER YOUR CHOISE -> W,S,A,D\n");
 }
 
-
-
-// shifts and adds as the player gives the direction
 void movevalue(int k)
 {
     int i;
@@ -112,8 +105,6 @@ int findlen(int n)
     }
 }
 
-
-// add 2 or 4 to grid after every play
 void addrandomno()
 {
     int no;
@@ -123,7 +114,7 @@ void addrandomno()
         i = (rand()) % (MAXRANDOMVALUE + 1);
         j = (rand()) % (MAXRANDOMVALUE + 1);
     } while (arr[i][j] != 0);
-    no = ((rand() % 10) + 1);// using probability to add 2 or 4
+    no = ((rand() % 10) + 1);
     if (no >5) {
         arr[i][j] = 4;
     }
@@ -132,8 +123,6 @@ void addrandomno()
     }
 }
 
-
-// updates the array
 void rupdate()
 {
     int i, j;
@@ -141,8 +130,6 @@ void rupdate()
         if (c[i] == c[i - 1]) {
             c[i] += c[i - 1];
             score = score + c[i];
-            if (score > highscore) {
-            }
             temp = 1;
             c[i - 1] = 0;
         }
@@ -158,8 +145,6 @@ void rupdate()
     movevalue(0);
 }
 
-
-// to reset the game
 void resetgame()
 {
     int i, j;
@@ -172,8 +157,6 @@ void resetgame()
     score = 0;
     addrandomno();
 }
-
-
 
 int m2048()
 {
@@ -194,7 +177,7 @@ int m2048()
     system("clear || cls");
 
     FILE* ptr;
-    ptr = fopen("highscore.txt", "r");// accesing file with highscore
+    ptr = fopen("highscore.txt", "r");
     fscanf(ptr, "%d", &highscore);
     fclose(ptr);
     addrandomno();
@@ -206,8 +189,6 @@ int m2048()
             fprintf(ptr, "%d", score);
             fclose(ptr);
         }
-
-        // player plays
         choise = getchar();
         while (getchar() != '\n')
          ;
