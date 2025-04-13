@@ -12,8 +12,14 @@ int arr[4][4] = { 0 }, c[4], temp = 0, len = 0, score = 0,
     highscore = 0, count = 0,
     ch = 0;
 
+
+
+// fun to find length/ in other file , just called  here//
 int findlen(int n);
 
+
+
+// basic printing
 void print()
 {
     int i, j, k, len1;
@@ -22,6 +28,8 @@ void print()
     printf(
         "\n===============2048==============\n");
     printf("YOUR SCORE=%d\n", score);
+
+    // highscore
     if (score < highscore) {
         printf("HIGH SCORE=%d\n", highscore);
     }
@@ -29,6 +37,9 @@ void print()
         highscore = score;
         printf("HIGH SCORE=%d\n", highscore);
     }
+
+
+// printing of board
     printf("\n---------------------------------\n");
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
@@ -66,12 +77,19 @@ void print()
     }
     printf(
         "\n---------------------------------\n");
+
+
+// printing basic options
     printf(">RESTART-> R\n");
     printf(" Back-> B\n");
     printf(" EXIT-> E\n");
     printf(" ENTER YOUR CHOISE -> W,S,A,D\n");
 }
 
+
+
+
+//shift of all the numbers according to the player//adding of numbers too
 void movevalue(int k)
 {
     int i;
@@ -105,6 +123,9 @@ int findlen(int n)
     }
 }
 
+
+
+// adding of 2 or 4 based on probability everytime after player makes a move
 void addrandomno()
 {
     int no;
@@ -112,7 +133,7 @@ void addrandomno()
     int i, j; 
     do {
         i = (rand()) % (MAXRANDOMVALUE + 1);
-        j = (rand()) % (MAXRANDOMVALUE + 1);
+        j = (rand()) % (MAXRANDOMVALUE + 1);// using probability
     } while (arr[i][j] != 0);
     no = ((rand() % 10) + 1);
     if (no >5) {
@@ -123,6 +144,10 @@ void addrandomno()
     }
 }
 
+
+
+
+// updating the array
 void rupdate()
 {
     int i, j;
@@ -145,6 +170,9 @@ void rupdate()
     movevalue(0);
 }
 
+
+
+// reset the game
 void resetgame()
 {
     int i, j;
@@ -158,10 +186,15 @@ void resetgame()
     addrandomno();
 }
 
+
+
+// main fun
 int m2048()
 {
     int i, j, k, m, n, same = 0;
     char choise, restart;
+
+    //basic printing
     printf("%s==========%sGAME ARENA%s==========%s\n\n",BLUE,RED,BLUE,RESET);
     printf("===============2048==============\n");
     printf("WELCOME TO PUZZLE 2048\n");
@@ -177,7 +210,7 @@ int m2048()
     system("clear || cls");
 
     FILE* ptr;
-    ptr = fopen("highscore.txt", "r");
+    ptr = fopen("highscore.txt", "r");// acessing the highscore text file
     
     if(ptr==NULL) printf("File didn't open!!"); return 0;
     
@@ -195,6 +228,8 @@ int m2048()
         choise = getchar();
         while (getchar() != '\n')
          ;
+
+        //basic playing controls
         if (choise == 'D' || choise == 'd') {
             count++;
             ch++;
@@ -249,6 +284,9 @@ int m2048()
                 }
             }
         }
+
+
+            // rest of controls
         else if (choise == 'R' || choise == 'r') {
             count = 0;
             resetgame();
@@ -301,6 +339,7 @@ int m2048()
                 same = 0;
             }
             else {
+                //end printing
                 printf(
                     "\n=============GAME OVER============");
                 printf("\nWANT TO PLAY MORE?? Y/N??\n");
