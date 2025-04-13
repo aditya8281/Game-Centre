@@ -146,9 +146,7 @@ void reg()
     scanf(" %s",name);
     printf(">Enter your Password: ");
     scanf(" %s",pass);
-    FILE *info = fopen("information.txt","w");
-    fclose(info);
-    info = fopen("information.txt","r");
+    FILE *info = fopen("information.txt","r");
     
     if(info==NULL)
     {
