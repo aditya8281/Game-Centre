@@ -72,6 +72,12 @@ void login()
     
     FILE *info = fopen("information.txt","r");
 
+    if(info==NULL)
+    {
+        printf("Error while opening file");
+        return;
+    }
+
     printf("%s===========%sGAME CENTRE%s===========%s\n\n",BLUE,RED,BLUE,RESET);
 
     printf(">Enter your User name: ");
@@ -134,7 +140,11 @@ void reg()
     scanf(" %s",pass);
     FILE *info = fopen("information.txt","r");
     
-    if(info==NULL) printf("File didn't open!!"); return 0;
+    if(info==NULL)
+    {
+        printf("Error while opening file");
+        return;
+    }
 
     while(fscanf(info,"%s %s",storedName,storedPass) != EOF)
     {
@@ -163,6 +173,12 @@ void reg()
     }
     fclose(info);
     info = fopen("information.txt","a");
+    
+    if(info==NULL)
+    {
+        printf("Error while opening file");
+        return;
+    }
 
 
     fprintf(info,"%s %s\n",name,pass);
