@@ -4,6 +4,15 @@
 
 #include "header.h"
 
+// Color codes
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define CYAN    "\033[36m"
+
+
 void Page2();
 
 #define MAXRANDOMVALUE 3
@@ -25,16 +34,16 @@ void print()
     int i, j, k, len1;
     printf("%s===========%sGAME CENTRE%s===========%s\n\n",BLUE,RED,BLUE,RESET);
 
-    printf("\n===============2048==============\n");
-    printf("YOUR SCORE=%d\n", score);
+    printf("\n%s===============%s2048%s==============%s\n",BLUE,RED,BLUE,RESET);
+    printf("%sYOUR SCORE=%s%d%s\n",YELLOW,CYAN,RESET, score);
 
     // highscore
     if (score < highscore) {
-        printf("HIGH SCORE=%d\n", highscore);
+        printf("%sHIGH SCORE=%s%d%s\n",YELLOW,CYAN,RESET, highscore);
     }
     else {
         highscore = score;
-        printf("HIGH SCORE=%d\n", highscore);
+        printf("%sHIGH SCORE=%s%d%s\n",YELLOW,CYAN,RESET, highscore);
     }
 
 
@@ -79,10 +88,10 @@ void print()
 
 
 // printing basic options
-    printf(">RESTART-> R\n");
-    printf(" Back-> B\n");
-    printf(" EXIT-> E\n");
-    printf(" ENTER YOUR CHOISE -> W,S,A,D\n");
+    printf(">%sRESTART->%s R\n",RED,BLUE);
+    printf(" %sBack->%s B\n",RED,BLUE);
+    printf(" %sEXIT->%s E\n",RED,BLUE);
+    printf(" %sENTER YOUR CHOISE ->%s W,S,A,D\n",GREEN,RESET);
 }
 
 
@@ -195,15 +204,15 @@ int m2048()
 
     //basic printing
     printf("%s==========%sGAME ARENA%s==========%s\n\n",BLUE,RED,BLUE,RESET);
-    printf("===============2048==============\n");
-    printf("WELCOME TO PUZZLE 2048\n");
-    printf("> CONTROLS\n");
-    printf("  FOR MOVES:- 'W','S','A','D'\n");
-    printf("  RESTART THE GAME:- 'R'\n");
-    printf("  Back:- 'B'\n");
-    printf("  EXIT:-'E'\n\n");
+    printf("\n%s===============%s2048%s==============%s\n",BLUE,RED,BLUE,RESET);
+    printf("%sWELCOME TO PUZZLE 2048\n%s",GREEN,RESET);
+    printf("%s> CONTROLS\n",RED);
+    printf("%s  FOR MOVES:-%s 'W','S','A','D'\n",BLUE,RESET);
+    printf("%s  RESTART THE GAME:-%s 'R'\n",BLUE,RESET);
+    printf("%s  Back:-%s 'B'\n",BLUE,RESET);
+    printf("%s  EXIT:-%s'E'\n\n",BLUE,RESET);
 
-    printf("\nPRESS ANY KEY TO START THE GAME....");
+    printf("%s\nPRESS ANY KEY TO START THE GAME....%s",GREEN,RESET);
 
     getchar();
     system("clear || cls");
@@ -345,7 +354,7 @@ int m2048()
                 //end printing
                 printf(
                     "\n=============GAME OVER============");
-                printf("\nWANT TO PLAY MORE?? Y/N??\n");
+                printf("%s\nWANT TO PLAY MORE?? %sY%s/%sN??\n%s",BLUE,RED,RESET,GREEN,RESET);
                 restart = getchar();
 
                 if(restart == 'Y'||restart=='y')
@@ -361,7 +370,7 @@ int m2048()
                 }
                 else
                 {
-                    printf("INVALID INPUT!!!");
+                    printf("INVALID INPUT!!!\n");
                 }
                 continue;
             }
