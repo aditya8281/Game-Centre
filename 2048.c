@@ -35,15 +35,15 @@ void print()
     printf("%s===========%sGAME CENTRE%s===========%s\n\n",BLUE,RED,BLUE,RESET);
 
     printf("\n%s===============%s2048%s==============%s\n",BLUE,RED,BLUE,RESET);
-    printf("%sYOUR SCORE=%s%d%s\n",YELLOW,CYAN,RESET, score);
+    printf("%sYOUR SCORE=%s%d%s\n",YELLOW,CYAN, score,RESET);
 
     // highscore
     if (score < highscore) {
-        printf("%sHIGH SCORE=%s%d%s\n",YELLOW,CYAN,RESET, highscore);
+        printf("%sHIGH SCORE=%s%d%s\n",YELLOW,CYAN, highscore,RESET);
     }
     else {
         highscore = score;
-        printf("%sHIGH SCORE=%s%d%s\n",YELLOW,CYAN,RESET, highscore);
+        printf("%sHIGH SCORE=%s%d%s\n",YELLOW,CYAN, highscore,RESET);
     }
 
 
