@@ -72,11 +72,11 @@ int mtictactoe() {
     
             
             playerMove();
-            
+            // check if player wins or not
             winner = checkWinner(player);
             if (winner != 0 || isBoardFull()==1) break;
             computerMove();
-            
+            // check if comp wins or not
             winner = checkWinner(player);                                
             if (winner != 0 || isBoardFull()==1) break;
     }
@@ -90,7 +90,7 @@ int mtictactoe() {
     
         while (1) {
             printBoardT(winner);
-            currentPlayer = (currentPlayer % 2!=0) ? 1 : 2; // Toggle player (1 or 2)
+            currentPlayer = (currentPlayer % 2!=0) ? 1 : 2; // switch between players
             mark = (currentPlayer == 1) ? 'X' : 'O'; // Player 1 is 'X' and Player 2 is 'O'
     
             int row, col;
@@ -105,7 +105,7 @@ int mtictactoe() {
                     printf(RESET);
                 }
                 scanf("%d %d", &row, &col);
-                row--; col--; // Adjust for 0-based indexing
+                row--; col--; // input to array no changing like 0-1 etc.
     
                 if (row >= 0 && row < 3 && col >= 0 && col < 3 && boardT[row][col] == ' ') {
                     boardT[row][col] = mark;
@@ -116,22 +116,24 @@ int mtictactoe() {
                     printf(RESET);
                 }
             }
-            // Check if the board is full (i.e., it's a draw)
+            // Check for draw
             if (isBoardFull()==1) {
                 printBoardT(winner);
                 break;
             }
 
-            // Check if there's a winner
+            // winner check
             if (checkWinner(player)) {
                 printBoardT(winner);
                 break;
             }
     
-            currentPlayer++; // Switch to the next player
+            currentPlayer++; // switching the player
         }
     }
 
+
+    // basic buttons
     printf(BLUE);
     printf("1. Restart\n2. Exit Game\n3. Exit App\n");
     printf(RESET);
@@ -165,7 +167,7 @@ void printBoardT(int winner) {
     {
         //system("clear||cls");
     }
-    printf("\n"); // Extra space
+    printf("\n"); 
     
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
@@ -176,7 +178,7 @@ void printBoardT(int winner) {
         if (i < 2) printf("___|___|___\n");
     }
     printf("   |   |   ");
-    printf("\n"); // Extra space
+    printf("\n"); 
 }
    
 
@@ -370,9 +372,9 @@ void playerMove() {
 
 
 
-// Simple algo for comp rand()is for random generation present in stdlib.h
+// Simple algo for comp// rand()is for random generation present in stdlib.h
 void computerMove() {
-    srand(time(NULL));
+    srand(time(NULL));// comp time delay
     int row, col;
     printf(GREEN);
     printf("Computer is making a move...\n");
