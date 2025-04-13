@@ -3,9 +3,9 @@
 
 #include "header.h"
 
-void Page2();
+void Page2();// stating it
 
-void game()
+void game()// cannot use main()
 {
     Page1();
 
