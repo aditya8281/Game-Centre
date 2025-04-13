@@ -347,17 +347,21 @@ int m2048()
                     "\n=============GAME OVER============");
                 printf("\nWANT TO PLAY MORE?? Y/N??\n");
                 restart = getchar();
-                
-                switch (restart) {
-                case 'Y':
-                case 'y':
+
+                if(restart == 'Y'||restart=='y')
+                {
                     resetgame();
                     print();
                     break;
-                case 'n':
-                case 'N':
+                }
+                else if(restart=='N'||restart=='n')
+                {
                     system("clear||cls");
                     Page2();
+                }
+                else
+                {
+                    printf("INVALID INPUT!!!");
                 }
                 continue;
             }
