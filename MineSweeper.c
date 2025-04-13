@@ -31,25 +31,32 @@ int dy[] = { -1, 0, 1, -1, 1, -1, 0, 1 };
 
 
 // make the start of board
-void initBoards() {
+void initBoards() 
+{
     for (int i = 0; i < SIZE; i++)
-        for (int j = 0; j < SIZE; j++) {
+        {
+        for (int j = 0; j < SIZE; j++)
+          {
             board[i][j] = '*';
             mines[i][j] = '0';
             revealed[i][j] = 0;
             flagged[i][j] = 0;
+          }   
         }
 }
 
 
 
-// make the mines// random generation
-void placeMines() {
+// making mines using rand() func
+void placeMines()
+{
     int count = 0;
-    while (count < MINES) {
+    while (count < MINES) 
+    {
         int x = rand() % SIZE;
         int y = rand() % SIZE;
-        if (mines[x][y] == '0') {
+        if (mines[x][y] == '0')
+        {
             mines[x][y] = 'M';
             count++;
         }
@@ -57,8 +64,10 @@ void placeMines() {
 }
 
 
-// count the no of mines
-int countAdjacentMines(int x, int y) {
+// count the no. of mines
+int countAdjacentMines(int x, int y) 
+
+{
     int count = 0;
     for (int d = 0; d < 8; d++) {
         int nx = x + dx[d];   // using direction array to count mines
@@ -70,8 +79,9 @@ int countAdjacentMines(int x, int y) {
 }
 
 
-// reveal the no.
-void reveal(int x, int y) {
+// revealing the no.
+void reveal(int x, int y)
+{
     if (x < 0 || x >= SIZE || y < 0 || y >= SIZE || revealed[x][y] || flagged[x][y])
         return;
 
@@ -79,9 +89,11 @@ void reveal(int x, int y) {
     int count = countAdjacentMines(x, y);
     board[x][y] = count + '0';
 
-    if (count == 0) {
+    if (count == 0)
+    {
         board[x][y] = ' ';
-        for (int d = 0; d < 8; d++) {
+        for (int d = 0; d < 8; d++) 
+        {
             reveal(x + dx[d], y + dy[d]);
         }
     }
@@ -90,8 +102,9 @@ void reveal(int x, int y) {
 
 
 
-// flag placing/toggling
-void toggleFlag(int x, int y) {
+// placing and removing flag
+void toggleFlag(int x, int y) 
+{
     if (x < 0 || x >= SIZE || y < 0 || y >= SIZE || revealed[x][y])
         return;
 
@@ -100,8 +113,9 @@ void toggleFlag(int x, int y) {
 
 
 
-//first time board printing
-void printBoard() {
+// printing the board with every move
+void printBoard()
+{
     system("clear||cls");
     printf("%s==========%sGAME ARENA%s==========%s\n\n",BLUE,RED,BLUE,RESET);
     printf("\n    ");
@@ -157,7 +171,7 @@ int isWin() {
 
 
 
-// main printing function for printing everytime
+// printing the final board
 void showFinalBoard() {
     printf("\nFinal Board:\n    ");
     for (int i = 0; i < SIZE; i++) printf("%2d ", i);
@@ -186,13 +200,15 @@ void showFinalBoard() {
 
 
 
-// main fun
-int mMineSweeper() {
+// main func
+int mMineSweeper() 
+{
     srand(time(NULL));
     int playing = 1;
     int reset=0;
 
-    while (playing) {
+    while (playing)
+    {
 
         initBoards();
         placeMines();
@@ -202,7 +218,8 @@ int mMineSweeper() {
         //basic buttons to play
         //basic playing mechanism
         
-        while (!gameOver) {
+        while (!gameOver)
+         {
             printBoard();
             printf("\nMenu:\n");
             printf("1. Reveal a cell\n");
@@ -214,22 +231,27 @@ int mMineSweeper() {
             char option;
             scanf(" %c", &option);
 
-            if (option == '1') {
+            if (option == '1') 
+            {
                 int x, y;
                 printf("Enter coordinates to reveal (row col): ");
                 scanf("%d %d", &x, &y);
 
-                if (x < 0 || x >= SIZE || y < 0 || y >= SIZE) {
+                if (x < 0 || x >= SIZE || y < 0 || y >= SIZE)
+                {
                     printf("Invalid input. Try again.\n");
                     continue;
                 }
 
-                if (flagged[x][y]) {
+                if (flagged[x][y])
+                {
                     printf("This cell is flagged. Unflag it first to reveal.\n");
                     continue;
                 }
 
-                if (mines[x][y] == 'M') {
+                if (mines[x][y] == 'M')
+                
+                {
                     printf("\n%sBOOM! You hit a mine!%s\n", RED, RESET);
                     showFinalBoard();
                     reset=1;
@@ -239,29 +261,38 @@ int mMineSweeper() {
 
                 reveal(x, y);
 
-                if (isWin()) {
+                if (isWin()) 
+                {
                     printf("\n%sCongratulations! You've cleared the minefield!%s\n", GREEN, RESET);
                     showFinalBoard();
                     gameOver = 1;
                     break;
                 }
-            } else if (option == '2') {
+            }
+            else if (option == '2') 
+            {
                 printf("%sGame has been reset.%s\n", CYAN, RESET);
                 reset = 1;
                 break;
-            } else if (option == '3') {
+            }
+            else if (option == '3')
+            {
                 int x, y;
                 printf("Enter coordinates to toggle flag (row col): ");
                 scanf("%d %d", &x, &y);
                 toggleFlag(x, y);
-            } else if (option == '4') {
+            } 
+            else if (option == '4')
+            {
                 printf("%sExiting game. Goodbye!%s\n", YELLOW, RESET);
                 sleep(1);
                 system("clear||cls");
                 playing = 0;
                 gameOver = 1;
                 Page2();
-            } else {
+            } 
+            else
+            {
                 printf("Invalid option. Try again.\n");
             }
         }
@@ -284,7 +315,8 @@ int mMineSweeper() {
             {
                 exit(0);
             }
-            else{
+            else
+            {
                 printf("Invalid Input");
                 goto in;
             }
