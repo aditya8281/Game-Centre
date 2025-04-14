@@ -59,7 +59,7 @@ int mtictactoe() {
         if (player!=1 && player!=2)
         {
             printf(RED);
-            printf("WRONG INPUT!!!\n");
+            printf("INVALID INPUT!!!\n\n");
             printf(RESET);
         }
         
