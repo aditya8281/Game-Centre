@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "header.h"
+#include "b24ee1021_b24ee1062_b24mt1036_b24ch1025_b24me1071_header.h"
 
 // Color codes
 #define RESET   "\033[0m"
@@ -31,6 +31,7 @@ int findlen(int n);
 // basic printing
 void print()
 {
+    system("clear||cls");
     int i, j, k, len1;
     printf("%s===========%sGAME CENTRE%s===========%s\n\n",BLUE,RED,BLUE,RESET);
 
@@ -199,11 +200,16 @@ void resetgame()
 // main fun
 int m2048()
 {
+    start:
+    system("clear||cls");
+
+    printf("%s==========%sGAME ARENA%s==========%s\n\n",BLUE,RED,BLUE,RESET);
+
     int i, j, k, m, n, same = 0;
     char choise, restart;
 
     //basic printing
-    printf("%s==========%sGAME ARENA%s==========%s\n\n",BLUE,RED,BLUE,RESET);
+    
     printf("\n%s===============%s2048%s==============%s\n",BLUE,RED,BLUE,RESET);
     printf("%sWELCOME TO PUZZLE 2048\n%s",GREEN,RESET);
     printf("%s> CONTROLS\n",RED);
@@ -311,6 +317,7 @@ int m2048()
         else if(choise == 'b' || choise == 'B')
         {
             system("clear||cls");
+            resetgame();
             Page2();
         }
         else if (choise == 'e' || choise == 'E') {
@@ -358,6 +365,7 @@ int m2048()
                     "\n=============GAME OVER============");
                 printf("%s\nWANT TO PLAY MORE?? %sY%s/%sN??\n%s",BLUE,RED,RESET,GREEN,RESET);
                 restart = getchar();
+                while(getchar()!='\n');
 
                 if(restart == 'Y'||restart=='y')
                 {
@@ -379,5 +387,6 @@ int m2048()
         }
     
     }
+    goto start;
     return 0;
 }
