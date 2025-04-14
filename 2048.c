@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "b24ee1021_b24ee1062_b24mt1036_b24ch1025_b24me1071_header.h"
+#include "header.h"
 
 // Color codes
 #define RESET   "\033[0m"
